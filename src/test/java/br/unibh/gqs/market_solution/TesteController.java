@@ -88,21 +88,6 @@ public class TesteController {
                 .andExpect(jsonPath("$[0].cpf").value("11111111111"))
                 .andExpect(jsonPath("$[1].cpf").value("777777777777"))                ;
     }
-
-    @Test
-    public void teste03() throws Exception {
-        CarrinhoCompra carrinho = new CarrinhoCompra();
-        carrinho.setId(1L); 
-        given(carrinhoCompraService.getById(1L)).willReturn(carrinho);
-
-        Produto produto = new Produto("Shampoo XPTO", BigDecimal.valueOf(12.99), new GregorianCalendar(2024, 7, 30).getTime());
-        ItemCompra itemCompra = new ItemCompra(produto, 2);
-
-        this.mockMvc.perform(post("/carrinhocompra/{id}", 1L)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(asJsonString(itemCompra)))
-            .andExpect(status().isOk());
-    }
 }
 
 

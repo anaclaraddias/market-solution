@@ -29,28 +29,30 @@ public class TesteRest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-
     @Test
     public void test01()
     {
         assertTrue(
-                this.restTemplate
-                        .getForObject("http://localhost:" + port + "/cliente/1", Cliente.class)
-                        .getCpf().equals("11111111111"));
+            this.restTemplate
+            .getForObject("http://localhost:" + port + "/cliente/1", Cliente.class)
+            .getCpf().equals("11111111111"))
+        ;
     }
 
     @Test
     public void test02() {
         assertTrue(
-                this.restTemplate
-                        .getForObject("http://localhost:" + port + "/produtos", List.class).size() == 3);
+            this.restTemplate
+            .getForObject("http://localhost:" + port + "/produtos", List.class).size() == 3)
+        ;
     }
 
     @Test
     public void test03() {
         assertTrue(
-                this.restTemplate
-                        .getForObject("http://localhost:" + port + "/carrinhocompra/1", CarrinhoCompra.class).getId().equals(1L));
+            this.restTemplate
+            .getForObject("http://localhost:" + port + "/carrinhocompra/1", CarrinhoCompra.class).getId().equals(1L))
+        ;
     }
 
     @Test
@@ -72,7 +74,7 @@ public class TesteRest {
 
     @Test
     public void test05() {
-        Cliente novoCliente = new Cliente("44444444444", "Patricia Ramos", "ouro");
+        Cliente novoCliente = new Cliente("55555555555", "Paulo Souza", "ouro");
 
         ResponseEntity<Cliente> responseEntity = restTemplate.postForEntity("http://localhost:" + port + "/cliente", novoCliente, Cliente.class);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -91,11 +93,9 @@ public class TesteRest {
         assertEquals("Amanda Moreira", clienteAtualizado.getNome());
     }
 
-  
-
     @Test
     public void test06() {
-        Cliente novoCliente = new Cliente("55555555555", "Pamela Roberta", "ouro");
+        Cliente novoCliente = new Cliente("66666666666", "Pamela Roberta", "ouro");
         ResponseEntity<Cliente> responseEntity = restTemplate.postForEntity("http://localhost:" + port + "/cliente", novoCliente, Cliente.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
